@@ -11,10 +11,14 @@ class AuthScreeen extends StatefulWidget {
 
 class _AuthScreeenState extends State<AuthScreeen> {
   var _isLogin = true;
+  // ignore: unused_field
+  final _formkey = GlobalKey<FormState>();
 
+  void _submit(){
+
+  }
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
@@ -44,28 +48,43 @@ class _AuthScreeenState extends State<AuthScreeen> {
                         keyboardType: TextInputType.emailAddress,
                         autocorrect: false,
                         textCapitalization: TextCapitalization.none,
+                        validator: (value) {
+                          if (value == null ||
+                              value.trim().isEmpty ||
+                              !value.contains('@')) {
+                                return 'Please enter a valid email address.';
+                              }
+                              return null;
+                        },
                       ),
                       TextFormField(
                         decoration: const InputDecoration(
                           labelText: "Password",
                         ),
                         obscureText: true, //invisiable the txt
+                        validator: (value) {
+                          if (value == null ||
+                              value.trim().length < 6) {
+                                return 'Password must be atleast 6 charaters long ';
+                              }
+                              return null;
+                        }
                       ),
                       const SizedBox(height: 12),
                       ElevatedButton(
-                          onPressed: () {},
-                          child: Text(_isLogin ? 'Login' : 'Signup'),
-                          ),
+                        onPressed: _submit,
+                        child: Text(_isLogin ? 'Login' : 'Signup'),
+                      ),
                       TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _isLogin = !_isLogin;
-                            });
-                          },
-                          child: Text(_isLogin
-                              ? 'Create the account!'
-                              : 'I have already have acccout! Login'),
-                              ),
+                        onPressed: () {
+                          setState(() {
+                            _isLogin = !_isLogin;
+                          });
+                        },
+                        child: Text(_isLogin
+                            ? 'Create the account!'
+                            : 'I have already have acccout! Login'),
+                      ),
                     ],
                   ),
                 ),
