@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code
+
 import 'package:flutter/material.dart';
 
 class AuthScreeen extends StatefulWidget {
@@ -8,8 +10,11 @@ class AuthScreeen extends StatefulWidget {
 }
 
 class _AuthScreeenState extends State<AuthScreeen> {
+  var _isLogin = true;
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
@@ -26,7 +31,8 @@ class _AuthScreeenState extends State<AuthScreeen> {
             Card(
               margin: const EdgeInsets.all(16),
               child: Padding(
-                padding: const EdgeInsets.only(left: 10,top: 0,bottom: 10,right: 10),
+                padding: const EdgeInsets.only(
+                    left: 10, top: 0, bottom: 10, right: 10),
                 child: Form(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -45,6 +51,21 @@ class _AuthScreeenState extends State<AuthScreeen> {
                         ),
                         obscureText: true, //invisiable the txt
                       ),
+                      const SizedBox(height: 12),
+                      ElevatedButton(
+                          onPressed: () {},
+                          child: Text(_isLogin ? 'Login' : 'Signup'),
+                          ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _isLogin = !_isLogin;
+                            });
+                          },
+                          child: Text(_isLogin
+                              ? 'Create the account!'
+                              : 'I have already have acccout! Login'),
+                              ),
                     ],
                   ),
                 ),
